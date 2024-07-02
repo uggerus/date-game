@@ -13,11 +13,28 @@ def test_calculate_day_of_week():
     assert calculate_day_of_week(2199, 5, 11) == 6
     
     
-def test_word_day_from_number():
-    assert word_day_from_number(0) == "Sunday"
-    assert word_day_from_number(1) == "Monday"
-    assert word_day_from_number(2) == "Tuesday"
-    assert word_day_from_number(3) == "Wednesday"
-    assert word_day_from_number(4) == "Thursday"
-    assert word_day_from_number(5) == "Friday"
-    assert word_day_from_number(6) == "Saturday"
+def test_day_name_from_number():
+    assert day_name_from_number(0) == "Sunday"
+    assert day_name_from_number(1) == "Monday"
+    assert day_name_from_number(2) == "Tuesday"
+    assert day_name_from_number(3) == "Wednesday"
+    assert day_name_from_number(4) == "Thursday"
+    assert day_name_from_number(5) == "Friday"
+    assert day_name_from_number(6) == "Saturday"
+
+
+
+def test_month_name_from_number():
+    assert month_name_from_number(1) == "January"
+    assert month_name_from_number(2) == "February"
+    assert month_name_from_number(3) == "March"
+    assert month_name_from_number(4) == "April"
+    assert month_name_from_number(5) == "May"
+    assert month_name_from_number(6) == "June"
+    assert month_name_from_number(7) == "July"
+    assert month_name_from_number(8) == "August"
+    assert month_name_from_number(9) == "September"
+    assert month_name_from_number(10) == "October"
+    assert month_name_from_number(11) == "November"
+    assert month_name_from_number(12) == "December"
+    

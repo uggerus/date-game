@@ -20,13 +20,18 @@ def make_random_day(month, year):
         else:
             return random.randint(1, 28)
 
-def word_day_from_number(day_of_week):
+def day_name_from_number(day_of_week):
     #day_of_week must be 0-6
     assert day_of_week >= 0 and day_of_week <= 6
     t = "Sunday", "Monday" , "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"
     return t[day_of_week]
-    
 
+def month_name_from_number(month):
+    #month must be between 1 and 12
+    assert month >= 1 and month <= 12
+    t = "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"
+    return t[month-1]
+    
 
 #random year between 1583 and 3000
 random_year = random.randint(1583, 3000)
@@ -38,3 +43,5 @@ random_day = make_random_day(random_month, random_year)
 
     
 actual_day_of_week = calculate_day_of_week(random_year, random_month, random_day)
+
+random_date = month_name_from_number(random_month)+ " " + str(random_day) + ", " + str(random_year)
