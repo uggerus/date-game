@@ -19,6 +19,12 @@ def make_random_day(month, year):
             return random.randint(1, 29)
         else:
             return random.randint(1, 28)
+
+def word_day_from_number(day_of_week):
+    #day_of_week must be 0-6
+    assert day_of_week >= 0 and day_of_week <= 6
+    t = "Sunday", "Monday" , "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"
+    return t[day_of_week]
     
 
 
@@ -31,3 +37,4 @@ random_month = random.randint(1, 12)
 random_day = make_random_day(random_month, random_year)
 
     
+actual_day_of_week = calculate_day_of_week(random_year, random_month, random_day)
