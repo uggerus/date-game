@@ -31,17 +31,38 @@ def month_name_from_number(month):
     assert month >= 1 and month <= 12
     t = "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"
     return t[month-1]
-    
 
-#random year between 1583 and 3000
-random_year = random.randint(1583, 3000)
+def get_user_guess():
+    while True:
+        try:
+            guess = int(input("Enter 0 for Sunday, 1 for Monday, ..., 6 for Saturday\n"))
+        except ValueError:
+            print("Input must be a number")
+            continue
 
-random_month = random.randint(1, 12)
+        if guess < 0 or guess > 6:
+            print("Your guess must be between 0 and 6.")
+            continue
+        else:
+            break
 
-#random day
-random_day = make_random_day(random_month, random_year)
+    return guess
 
-    
-actual_day_of_week = calculate_day_of_week(random_year, random_month, random_day)
+def play_game():
+    #random year between 1583 and 3000
+    random_year = random.randint(1583, 3000)
 
-random_date = month_name_from_number(random_month)+ " " + str(random_day) + ", " + str(random_year)
+    random_month = random.randint(1, 12)
+
+    #random day
+    random_day = make_random_day(random_month, random_year)
+
+    actual_day_of_week = calculate_day_of_week(random_year, random_month, random_day)
+    random_date = month_name_from_number(random_month)+ " " + str(random_day) + ", " + str(random_year)
+    print("Guess the day of the week for: " + random_date)
+
+    guess = get_user_guess()
+
+
+if __name__ == "__main__":
+    play_game()

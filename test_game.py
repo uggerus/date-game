@@ -38,3 +38,8 @@ def test_month_name_from_number():
     assert month_name_from_number(11) == "November"
     assert month_name_from_number(12) == "December"
     
+
+def test_user_input(monkeypatch):
+
+    monkeypatch.setattr('builtins.input', lambda _: "1")
+    assert get_user_guess() == 1
