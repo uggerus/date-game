@@ -1,4 +1,5 @@
 import random
+import time
 
 def  calculate_day_of_week(year, month, day):
     t = 0, 3, 2, 5, 0, 3, 5, 1, 4, 6, 2, 4
@@ -61,7 +62,21 @@ def play_game():
     random_date = month_name_from_number(random_month)+ " " + str(random_day) + ", " + str(random_year)
     print("Guess the day of the week for: " + random_date)
 
+    start = time.time()
+
     guess = get_user_guess()
+
+    end = time.time()
+
+    elapsed_time = end - start
+
+    if guess == actual_day_of_week:
+        print("Correct! The day of the week for " + random_date + " is " + day_name_from_number(actual_day_of_week))
+    else:
+        print("Incorrect.  You said it was " + day_name_from_number(guess) + " but it was " + day_name_from_number(actual_day_of_week))
+
+    print("The time it took you was: " + str(elapsed_time))
+    
 
 
 if __name__ == "__main__":
