@@ -43,3 +43,5 @@ def test_user_input(monkeypatch):
 
     monkeypatch.setattr('builtins.input', lambda _: "1")
     assert get_user_guess() == 1
+
+    
