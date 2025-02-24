@@ -1,4 +1,54 @@
 from day_of_week_game import *
+import json
+import pytest
+
+@pytest.fixture(scope="module")  # Load JSON data once per module (test file)
+def date_day_data():
+    with open("date_day.json", 'r') as f:
+        return json.load(f)
+
+day_name_to_number = {
+    "Sunday": 0,
+    "Monday": 1,
+    "Tuesday": 2,
+    "Wednesday": 3,
+    "Thursday": 4,
+    "Friday": 5,
+    "Saturday": 6
+}
+
+def test_calculate_day_of_week_against_json(date_day_data):
+    """
+    Pytest function to test calculate_day_of_week against dates in date_day_output.json.
+    """
+    mismatches = []
+    for date_str, expected_day_name in date_day_data.items():
+        year, month, day = map(int, date_str.split('-'))
+        calculated_day_number = calculate_day_of_week(year, month, day)
+        expected_day_number = day_name_to_number[expected_day_name]
+
+        assert isinstance(calculated_day_number, int), f"For date {date_str}, calculate_day_of_week did not return an integer. Got: {calculated_day_number}"
+        assert 0 <= calculated_day_number <= 6, f"For date {date_str}, calculate_day_of_week returned an invalid day number: {calculated_day_number}. Expected 0-6."
+        assert calculated_day_number == expected_day_number, f"Mismatch for date {date_str}. Expected {expected_day_name} (number {expected_day_number}), but got day number {calculated_day_number}."
+
+        if calculated_day_number != expected_day_number:
+            mismatches.append({
+                "date": date_str,
+                "expected_day": expected_day_name,
+                "calculated_day_number": calculated_day_number
+            })
+
+    if mismatches:
+        error_message = "Day of week mismatches found:\n"
+        for mismatch in mismatches:
+            error_message += (
+                f"  Date: {mismatch['date']}, Expected: {mismatch['expected_day']}, "
+                f"Calculated Number: {mismatch['calculated_day_number']}\n"
+            )
+        pytest.fail(error_message) # Fail the pytest test if mismatches exist
+    else:
+        print("\nAll day of week tests passed against date_day_output.json!") # Optional success message when run directly (not pytest)
+
 
 def test_calculate_day_of_week():
     assert calculate_day_of_week(2000, 9, 12) == 2
@@ -44,4 +94,4 @@ def test_user_input(monkeypatch):
     monkeypatch.setattr('builtins.input', lambda _: "1")
     assert get_user_guess() == 1
 
-    
+
